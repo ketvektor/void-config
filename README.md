@@ -15,11 +15,10 @@ Original [README.md](README.md) text contents:
 ### Install
 
 - Clone me
-```
+
 git clone https://github.com/eoli3n/void-config
-```
+
 - Run OS installer at [scripts/install/](scripts/install/)
 - Install packages and configurations with [ansible](ansible/)
 - Use [dotfiles](https://github.com/eoli3n/dotfiles)
-```
 ```
