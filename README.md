@@ -22,3 +22,4 @@ git clone https://github.com/eoli3n/void-config
 - Install packages and configurations with [ansible](ansible/)
 - Use [dotfiles](https://github.com/eoli3n/dotfiles)
 ```
+```
