@@ -10,7 +10,6 @@
     flatpakrepo_url: "{{ item.repo }}"
   loop:
     - { name: 'flathub', repo: 'https://dl.flathub.org/repo/flathub.flatpakrepo' }
-    - { name: 'flathub-beta', repo: 'https://flathub.org/beta-repo/flathub-beta.flatpakrepo' }
 
 - name: Install flatpak packages
   community.general.flatpak:
@@ -20,23 +19,3 @@
   loop:
     - com.spotify.Client
     - com.vscodium.codium
-    - com.mojang.Minecraft
-    - com.github.Anuken.Mindustry
-    - us.zoom.Zoom
-    - com.microsoft.Teams
-
-- name: Install flatpak beta packages
-  community.general.flatpak:
-    name: '{{ item }}'
-    state: present
-    remote: flathub-beta
-  loop:
-    - org.freecadweb.FreeCAD
-
-- name: Override Teams perms
-  shell: |
-    flatpak override com.microsoft.Teams \
-      --filesystem=~/desktop:ro \
-      --filesystem=~/img:ro \
-      --filesystem=~/downloads:ro \
-      --filesystem=~/share:ro

@@ -36,6 +36,7 @@
       - mesa-demos # glxgears command
       - intel-media-driver # intel driver iHD
       - libva-utils # hardware video acceleration
+      - nvidia-dkms
       # Steam
       - mesa-vulkan-intel
       - mesa-vulkan-intel-32bit
@@ -52,31 +53,33 @@
       # Graphical apps
       - imv # img visualizer
       - kitty # terminal emulator
-      - firefox-i18n-fr # web browser
+      - firefox # web browser
       - chromium # web browser
       - gimp # img editor
-      - evolution # mail/contact/agenda client
+      #- evolution # mail/contact/agenda client
       - seahorse # gnome keyring manager
       - kolourpaint # img editor
       - shotwell # photo manager
       - swappy # screenshot editor
-      - libreoffice # libreoffice
-      - libreoffice-i18n-fr # libreoffice suite fr
+      #- libreoffice # libreoffice
+      #- libreoffice-i18n-fr # libreoffice suite fr
       - lxappearance # theme manager
       - gnome-themes-extra # adwaita-dark theme
       - mpv # video player
       - nemo # file manager
       - tumbler # thumbnailer
       - openvpn
+      - tailscale
+      - wireguard-dkms
       - playerctl # music player cli controller
-      - rdesktop # remote desktop client
-      - remmina # remote desktop client
+      #- rdesktop # remote desktop client
+      #- remmina # remote desktop client
       - transmission-gtk # torrent downloader
-      - texlive-bin # latex
-      - texlive-core # latex
-      - texlive-latexextra # latex
-      - texlive-XeTeX # xelatex
-      - texlive-Xdvi # xelatex
+      #- texlive-bin # latex
+      #- texlive-core # latex
+      #- texlive-latexextra # latex
+      #- texlive-XeTeX # xelatex
+      #- texlive-Xdvi # xelatex
       - variety # random backgrounds
       - papirus-icon-theme # icon theme
       - youtube-dl
@@ -98,7 +101,7 @@
   community.general.xbps:
     name: '{{item}}'
   loop:
-      - steam # games manager
+      #- steam # games manager
       - xrandr # some games requires it
       - mono
       - libgcc-32bit

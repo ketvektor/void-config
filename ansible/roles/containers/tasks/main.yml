@@ -15,6 +15,9 @@
       - k3s # Lightweight Kubernetes in a signle binary
       - stern # tail multiple pods on Kubernetes
       - podman-compose # mutli-container podman apps
+      - lazydocker
+      - libnvidia-container
+      - nvidia-docker
       #- kubectx         # switch clusters/namespaces
       #- kustomize       # yaml templator
       #- kompose-bin     # docker-compose to manifest convertor

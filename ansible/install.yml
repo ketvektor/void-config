@@ -17,7 +17,6 @@
     - { role: kernel, tags: kernel }
     - { role: desktop, tags: desktop }
     - { role: flatpak, tags: flatpak }
-    - { role: appimage, tags: appimage }
     - { role: temp, tags: temp }
     - { role: runit, tags: runit }
     - { role: power, tags: power }

@@ -42,7 +42,7 @@ select_disk () {
 }
 
 wipe () {
-    ask "Do you want to wipe all datas on $ENTRY ?"
+    ask "Do you really want to wipe all data on $ENTRY ?"
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
         # Clear disk
@@ -54,13 +54,20 @@ wipe () {
 
 partition () {
     # EFI part
-    print "Creating EFI part"
-    sgdisk -n1:1M:+512M -t1:EF00 "$DISK"
+    # increased EFI size to 1Gb from 512Mb
+    print "Creating EFI partition"
+    sgdisk -n1:1M:+1G -t1:EF00 -c1:efi "$DISK"
     EFI="$DISK-part1"
 
     # ZFS part
-    print "Creating ZFS part"
-    sgdisk -n3:0:0 -t3:bf01 "$DISK"
+    # modified to use only a portion of the drive space (2 Tb drive)
+    print "Creating ZFS partition"
+    sgdisk -n3:0:+512G -t3:bf01 -c3:zfs "$DISK"
+
+    # Separate storage partition utilizing the remainder of drive space
+    print "Creating storage partition"
+    sgdisk -n4:0:0 -t4:8309 -c4:data # 8309 = LUKS; 8300 = Linux FS
+    DATASTOR="$DISK-part4"
 
     # Inform kernel
     partprobe "$DISK"
@@ -78,6 +85,15 @@ zfs_passphrase () {
     echo
     echo "$pass" > /etc/zfs/zroot.key
     chmod 000 /etc/zfs/zroot.key
+}
+
+luks_create () {
+    # Prompt user for password
+    read -r -p "> LUKS passphrase " -s lukspass
+    echo -n "$LUSKPASS" | cryptsetup luksFormat "$DATASTOR"
+    echo -n "$LUSKPASS" | cryptsetup luksOpen "$DATASTOR" luksData
+    print "Creating EXT4 FS on $DATASTOR"
+    mkfs.ext4 "$DATASTOR" -L "Data"
 }
 
 create_pool () {
@@ -187,6 +203,8 @@ then
     create_pool
     # Create root dataset
     create_root_dataset
+    # Create LUKS-encrypted storage
+    luks_create
 fi
 
 ask "Name of the slash dataset ?"
@@ -204,6 +222,7 @@ if [[ $install_reply == "first" ]]
 then
     create_home_dataset
 fi
+
 
 export_pool
 import_pool

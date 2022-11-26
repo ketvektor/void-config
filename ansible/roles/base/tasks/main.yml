@@ -20,8 +20,8 @@
       - asciinema # term recorder
       - expect # automation tool
       - glow # render markdown cli
-      - tiny # irc client
-      - senpai # irc client with ircv3/chathistory for soju bouncer
+      #- tiny # irc client
+      #- senpai # irc client with ircv3/chathistory for soju bouncer
       - termdown # cli countdown timer
       - nnn # terminal file manager
       # System
@@ -29,11 +29,11 @@
       - htop # system monitor
       - net-tools # netstat
       - mtr # ping/traceroute diag tool
-      - fwupd # dell firmware updater
+      #- fwupd # dell firmware updater
       - nmap # port scanner
       - tcpdump # packet analyzer
       - whois # query registry
-      - stress # stress test tool
+      #- stress # stress test tool
       - efivar # tool to manipulate efi vars
       - vsv # list runit services
       # Disk
@@ -82,6 +82,9 @@
       - pre-commit # git pre-commit hooks manager
       - pv # progress bar
       - lzop # compression tool
+      - micro # terminal editor
+      - sublime-text4
+      - barrier-gui # kvm for win, mac, and linux
 #- arch-audit # list vulnerabilities
 #- reflector # mirror sorter
 

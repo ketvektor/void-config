@@ -87,7 +87,7 @@ EOF
 # Configure DNS
 cat >> /mnt/etc/resolvconf.conf <<"EOF"
 resolv_conf=/etc/resolv.conf
-name_servers="1.1.1.1 9.9.9.9"
+name_servers="91.231.153.2 192.211.0.2 9.9.9.9 149.112.112.112"
 EOF
 
 # Enable ip forward
@@ -98,13 +98,13 @@ EOF
 # Prepare locales and keymap
 print 'Prepare locales and keymap'
 echo 'KEYMAP=fr' > /mnt/etc/vconsole.conf
-echo 'fr_FR.UTF-8 UTF-8' > /mnt/etc/default/libc-locales
-echo 'LANG="fr_FR.UTF-8"' > /mnt/etc/locale.conf
+echo 'en_US.UTF-8 UTF-8' > /mnt/etc/default/libc-locales
+echo 'LANG="en_US.UTF-8"' > /mnt/etc/locale.conf
 
 # Configure system
 cat >> /mnt/etc/rc.conf << EOF
-KEYMAP="fr"
-TIMEZONE="Europe/Paris"
+KEYMAP="en"
+TIMEZONE="America/New_York"
 HARDWARECLOCK="UTC"
 EOF
 
@@ -172,6 +172,7 @@ print 'Configure sudo'
 cat > /mnt/etc/sudoers <<EOF
 root ALL=(ALL) ALL
 $user ALL=(ALL) ALL
+Defaults timestamp_timeout=90
 Defaults rootpw
 EOF
 
@@ -205,7 +206,7 @@ EOF
 
 mkdir -p /mnt/etc/cmdline.d/
 cat > /mnt/etc/cmdline.d/keymap.conf <<EOF
-rd.vconsole.keymap=fr
+rd.vconsole.keymap=en
 EOF
 
 # Set cmdline
@@ -216,7 +217,7 @@ print 'Generate zbm'
 chroot /mnt/ /bin/bash -e <<"EOF"
 
   # Export locale
-  export LANG="fr_FR.UTF-8"
+  export LANG="en_US.UTF-8"
 
   # Generate initramfs, zfsbootmenu
   xbps-reconfigure -fa
